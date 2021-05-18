@@ -39,6 +39,7 @@ public class FirstTest {
     @After
     public void tearDown()
     {
+        driver.rotate(ScreenOrientation.PORTRAIT);
         driver.quit();
     }
 
@@ -63,6 +64,8 @@ public class FirstTest {
                 "Cannot find 'Object-oriented programming language' topic searching by Java",
                 15
         );
+
+        driver.rotate(ScreenOrientation.LANDSCAPE);
     }
 
     @Test
@@ -97,6 +100,7 @@ public class FirstTest {
                 "X is still present on the page",
                 15
         );
+        driver.rotate(ScreenOrientation.LANDSCAPE);
     }
 
     @Test
@@ -277,6 +281,8 @@ public class FirstTest {
                 "Cannot delete saved article",
                 5
         );
+
+        driver.rotate(ScreenOrientation.LANDSCAPE);
     }
 
     @Test
@@ -347,6 +353,8 @@ public class FirstTest {
                 "We found too few results",
                 amount_of_search_results > 0
         );
+
+        driver.rotate(ScreenOrientation.LANDSCAPE);
     }
 
     @Test
@@ -379,6 +387,8 @@ public class FirstTest {
                 By.xpath(search_result_locator),
                 "We've found some result by request" + search_line
         );
+
+        driver.rotate(ScreenOrientation.LANDSCAPE);
     }
 
     @Test
@@ -425,6 +435,8 @@ public class FirstTest {
                 title_before_rotation,
                 title_after_rotation
         );
+
+        driver.rotate(ScreenOrientation.LANDSCAPE);
     }
 
     @Test
