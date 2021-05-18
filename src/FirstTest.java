@@ -626,6 +626,36 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void assertTitle(){
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Can`t find search Wikipedia input",
+                10
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                "Java",
+                "Can`t find search input",
+                10
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='Java (programming language)']"),
+                "Cannot  find 'Java (programming language)' title topic searching",
+                15
+        );
+
+        String search_result_locator = "//*[@text='Java (programming language)']";
+
+        assertElementPresent(
+                By.xpath(search_result_locator),
+                "Cannot find title 'Java (programming language)' ",
+                5
+        );
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
     {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
@@ -750,5 +780,15 @@ public class FirstTest {
     {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribute);
+    }
+
+    private void assertElementPresent(By by, String error_message, long timeoutInSeconds)
+    {
+        List element = driver.findElements(by);
+        int amountElements = element.size();
+        Assert.assertTrue(
+                error_message,
+                amountElements > 0
+        );
     }
 }
