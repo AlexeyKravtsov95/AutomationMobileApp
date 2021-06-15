@@ -63,6 +63,18 @@ public class MainPageObject {
         return element;
     }
 
+    public WebElement assertElementHasText(By by, String expected_message, String error_message, long timeoutInSeconds)
+    {
+        WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
+        String actual = element.getAttribute("text");
+        Assert.assertEquals(
+                "Text " + expected_message + " is not correctly",
+                expected_message,
+                actual
+        );
+        return element;
+    }
+
     protected void swipeUp(int timeOfSwipe)
     {
         TouchAction action = new TouchAction(driver);
@@ -125,5 +137,21 @@ public class MainPageObject {
             String default_message = "An element " + by.toString() + " supposed to be not present";
             throw new AssertionError(default_message + " " +  error_message);
         }
+    }
+
+    public String waitForElementAndGetAttribute(By by, String error_message, String attribute, long timeoutInSeconds)
+    {
+        WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
+        return element.getAttribute(attribute);
+    }
+
+    public void assertElementPresent(By by, String error_message, long timeoutInSeconds)
+    {
+        List element = driver.findElements(by);
+        int amountElements = element.size();
+        Assert.assertTrue(
+                error_message,
+                amountElements > 0
+        );
     }
 }

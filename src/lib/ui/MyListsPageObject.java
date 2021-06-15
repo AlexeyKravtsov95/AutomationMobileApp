@@ -59,4 +59,24 @@ public class MyListsPageObject extends MainPageObject{
         );
         this.waitForArticleToDisappearByTitle(article_title);
     }
+
+    public void checkDeletedArticleIsNotPresent(String article_title)
+    {
+        String article_xpath = getFolderXpathByName(article_title);
+        this.waitForElementNotPresent(
+                By.xpath(article_xpath),
+                "Cannot delete saved article",
+                5
+        );
+    }
+
+    public void tapOnSavedArticle(String article_title)
+    {
+        String article_xpath = getFolderXpathByName(article_title);
+        this.waitForElementAndClick(
+                By.xpath(article_xpath),
+                "Cannot find saved article",
+                5
+        );
+    }
 }

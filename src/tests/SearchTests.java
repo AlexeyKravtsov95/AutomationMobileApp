@@ -54,4 +54,22 @@ public class SearchTests extends CoreTestCase {
 
         driver.rotate(ScreenOrientation.LANDSCAPE);
     }
+
+    @Test
+    public void testTextIsPresent() {
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        SearchPageObject.assertElementHasText("Search…", "Search…");
+    }
+
+    @Test
+    public void testSearchText(){
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Swift");
+        SearchPageObject.assertElementHasText("Swift (programming language)", "Swift (programming language)");
+        SearchPageObject.clickCancelSearch();
+        SearchPageObject.assertElementHasText("Search…", "Search…");
+
+    }
 }
